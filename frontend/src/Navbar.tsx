@@ -1,12 +1,12 @@
 import './Nav.css'
-/*import './expertaLogo.PNG'*/
+import './expertaLogo.jpg'
 
 function Navbar(){
     return(
         <>
             <div className="header">
                 <div className='topOfHeader'>
-                    <img className='logo'></img>
+                    <img id='logo' src='src/expertaLogo.jpg'></img>
                 </div>
                 <div className='navbarBottom'>
                     <a className='navbarButton'>
