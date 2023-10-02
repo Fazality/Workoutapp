@@ -1,7 +1,7 @@
 function ProfilePage() {
 
     return (
-      <h1>THIS IS THE PROFILE PAGE!!!</h1>
+      <h1 className="pageSpecificText">THIS IS THE PROFILE PAGE!!!</h1>
     )
   }
   

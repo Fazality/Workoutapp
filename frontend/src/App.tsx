@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar"
 import "./components/Navbar.css"
 
 import ProfilePage from "./components/body/profilePage.tsx"
+import "./components/body/profilePage.css"
 import WorkoutPage from "./components/body/workoutPage.tsx"
 import ExcercisePage from "./components/body/excercisePage.tsx"
 import ChatPage from "./components/body/chatPage.tsx"
