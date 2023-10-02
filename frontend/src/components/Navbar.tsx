@@ -1,6 +1,8 @@
 import "../assets/expertaLogo.jpg"
 import react from 'react'
 
+import { Link } from "react-router-dom"
+
 const Navbar: React.FC = () =>{
     return(
         <>
@@ -9,18 +11,18 @@ const Navbar: React.FC = () =>{
                     <img className='logo' src='src/assets/expertaLogo.jpg'></img>
                 </div>
                 <div className='navbarBottom'>
-                    <a className='navbarButton'>
+                    <Link to={"/"} className='navbarButton'>
                         <h5 className='buttonText'>Profile</h5>
-                    </a>
-                    <a className='navbarButton'>
+                    </Link>
+                    <Link to={"/workout"} className='navbarButton'>
                         <h5 className='buttonText'>Workout</h5>
-                    </a>
-                    <a className='navbarButton'>
+                    </Link>
+                    <Link to={"/excercise"} className='navbarButton'>
                         <h5 className='buttonText'>Excercise</h5>
-                    </a>
-                    <a className='navbarButton'>
+                    </Link>
+                    <Link to={"/chat"} className='navbarButton'>
                         <h5 className='buttonText'>Chat</h5>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </>
