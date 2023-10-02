@@ -1,7 +1,7 @@
 function WorkoutPage() {
 
     return (
-      <h1 className="pageSpecificText">THIS IS THE WORKOUT PAGE!!!</h1>
+      <h1 className="pageSpecificText">WORKOUT PAGE!</h1>
     )
   }
   

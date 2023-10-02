@@ -1,7 +1,7 @@
 function ChatPage() {
 
     return (
-      <h1 className="pageSpecificText">THIS IS THE CHAT PAGE!!!</h1>
+      <h1 className="pageSpecificText">CHAT PAGE!</h1>
     )
   }
   
