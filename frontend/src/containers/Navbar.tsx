@@ -59,7 +59,7 @@ const Navbar: React.FC = () =>{
         <>
             <div className="header">
                 <div className='topOfHeader'>
-                    <img className='logo' src='src/expertaLogo.jpg'></img>
+                    <img className='logo' src='src/containers/expertaLogo.jpg'></img>
                 </div>
                 <div className='navbarBottom'>
                     <a className='navbarButton'>
