@@ -9,18 +9,18 @@ function Navbar(){
                     <img id='logo' src='src/expertaLogo.jpg'></img>
                 </div>
                 <div className='navbarBottom'>
-                    <a className='navbarButton'>
+                    <link className='navbarButton'>
                         <h5 className='buttonText'>Profile</h5>
-                    </a>
-                    <a className='navbarButton'>
+                    </link>
+                    <link className='navbarButton'>
                         <h5 className='buttonText'>Workout</h5>
-                    </a>
-                    <a className='navbarButton'>
+                    </link>
+                    <link className='navbarButton'>
                         <h5 className='buttonText'>Excercise</h5>
-                    </a>
-                    <a className='navbarButton'>
+                    </link>
+                    <link className='navbarButton'>
                         <h5 className='buttonText'>Chat</h5>
-                    </a>
+                    </link>
                 </div>
             </div>
         </>
