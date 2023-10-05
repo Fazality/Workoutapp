@@ -29,7 +29,7 @@ const Navbar: React.FC = () =>{
                     </Link>
                     <Link to={"/chat"} className='navbarButton'>
                         <img className="navbarPicture" src="src/assets/chatPage.jpg"></img>
-                        <h5 className='buttonText'>Chat</h5>
+                        <h5 className='buttonText'>FAQ & Chat</h5>
                     </Link>
                 </div>
             </div>

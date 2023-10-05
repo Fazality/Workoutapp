@@ -1,7 +1,7 @@
 .adminHeader {
     position: fixed;
     margin-left:0;
-    margin-top:500px;
+    margin-top:0;
     width:100%;
     height:auto;
     background-color: rgb(100, 100, 100);
@@ -10,5 +10,6 @@
     border-color: rgb(76, 148, 58);
 }
 .adminTitle {
-    float:right;
+    position: absolute;
+    margin-top:;
 }
