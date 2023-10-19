@@ -9,8 +9,9 @@ import RequireAuth from "./components/RequireAuth";
 import AdminPage from "./containers/AdminPage";
 import OtherPage from "./containers/OtherPage";
 import FAQPage from "./containers/FAQPage";
-import Browse from "./containers/BrowsePage";
+import BrowsePage from "./containers/BrowsePage/index";
 import ProfilePage from "./containers/ProfilePage";
+import WorkoutPage from "./containers/WorkoutPage";
 
 export default function App() {
   return (
@@ -25,8 +26,9 @@ export default function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/other" element={<OtherPage />} />
           <Route path="/faq" element={<FAQPage />} />
-          <Route path="/browse" element={<Browse />} />
+          <Route path="/browse" element={<BrowsePage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/workout" element={<WorkoutPage />} />
 
         </Route>
         <Route element={<RequireAuth allowedRoles={[2, 3]}/>}>

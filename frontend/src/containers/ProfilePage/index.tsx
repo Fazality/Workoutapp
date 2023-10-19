@@ -6,12 +6,15 @@ import * as React from "react";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { CssBaseline, ThemeProvider, Typography } from "@mui/material";
+import {Accordion, CssBaseline, ThemeProvider, Typography} from "@mui/material";
 import { AppBar } from "@mui/material";
 import { Toolbar } from "@mui/material";
 import { Card, CardContent } from "@mui/material/";
 import NavigationBar from "../navigationBar";
 import { createTheme } from "@mui/material/styles";
+import enGB from 'date-fns/locale/en-GB'
+import dayjs from 'dayjs';
+import {useEffect} from "react";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -22,36 +25,22 @@ export default function ProfilePage() {
   const [workoutData, setWorkoutData] = React.useState({});
 
   const handleDateClick = (date) => {
-    setSelectedDate(date);
-    setShowWorkoutInfo(true);
+    setSelectedDate(dayjs(date).format('YYYY-MM-DD'))
+  }
 
-    // Pseudo-code: Fetch workout information for the selected date from the backend.
-    // Replace the following with actual backend API calls:
-    // fetchWorkoutDataFromBackend(date).then(data => setWorkoutData(data));
-  };
-
-  // Pseudo-code: Save workout information to the backend for the selected date.
-  // This part will be implemented in the future when the backend and database exist.
-  const saveWorkoutData = (date, data) => {
-    // Replace the following with actual backend API calls:
-    // saveWorkoutDataToBackend(date, data);
-  };
+  useEffect(() => {
+    console.log(selectedDate)
+  }, [selectedDate]);
 
   return (
     <>
       <ThemeProvider theme={defaultTheme} />
       <CssBaseline />
-      <NavigationBar>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Xperta Workout Planner
-          </Typography>
-        </Toolbar>
-      </NavigationBar>
-      <main style={{ display: "flex", marginTop: "1%" }}>
+      <NavigationBar></NavigationBar>
+      <main style={{ display: "flex", marginTop: "5%" }}>
         <div style={{ width: "50%", paddingLeft: "1rem" }}>
           {/* Calendar component */}
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enGB}>
             <DateCalendar onChange={handleDateClick} />
           </LocalizationProvider>
         </div>
@@ -63,9 +52,8 @@ export default function ProfilePage() {
             <CardContent style={{ flex: 1 }}>
               <Typography variant="h5">Workout Information</Typography>
               <div id="workout-info">
-                {showWorkoutInfo
-                  ? "Workout information is visible"
-                  : "Click on a date to see workout information"}
+                <Typography>
+                </Typography>
               </div>
             </CardContent>
           </Card>
