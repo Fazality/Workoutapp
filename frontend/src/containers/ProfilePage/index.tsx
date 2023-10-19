@@ -16,21 +16,38 @@ import enGB from 'date-fns/locale/en-GB'
 import dayjs from 'dayjs';
 import {useEffect} from "react";
 
+
+function getAllWorkouts(){
+  return fetch("http://localhost:4001/api/planned", {
+    method: "GET",
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+  }).then((response) =>
+  {
+    return response.json()
+  })
+}
+
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function ProfilePage() {
   const [showWorkoutInfo, setShowWorkoutInfo] = React.useState(false);
   const [selectedDate, setSelectedDate] = React.useState(null);
-  const [workoutData, setWorkoutData] = React.useState({});
+  const [workoutData, setWorkoutData] = React.useState();
 
   const handleDateClick = (date) => {
     setSelectedDate(dayjs(date).format('YYYY-MM-DD'))
+    getAllWorkouts()
   }
 
   useEffect(() => {
     console.log(selectedDate)
   }, [selectedDate]);
+
+
+
+
 
   return (
     <>

@@ -27,6 +27,5 @@ export const deleteById = (table: string, id: number) => {
 export const updateById = (table: string, id: number, data: any) => {
     const setClause = Object.keys(data).map(key => `${key} = ?`).join(',');
     const values = [...Object.values(data), id];
-    const changes = db.prepare(`UPDATE ${table} SET ${setClause} WHERE ID = ?`).run(...values).changes;
-    return changes; 
+    return db.prepare(`UPDATE ${table} SET ${setClause} WHERE  = ?`).run(...values).changes;
 };
