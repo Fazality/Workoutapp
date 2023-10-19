@@ -2,7 +2,7 @@ export type User = {
     ID: number;
     username: string;
     password: string;
-    Role_ID: number;
+    RoleID: number;
 }
 
 
@@ -29,7 +29,7 @@ export type Exercise = {
 export type Workout = {
     ID: number;
     name: string;
-    UsserID: number;
+    UserID: number;
 }
 
 
@@ -40,8 +40,8 @@ export type Role = {
 
 
 export type PlannedWorkout = {
-    id: number;
-    workoud_id: number;
+    ID: number;
+    WorkoutID: number;
     date: Date;
 }
 

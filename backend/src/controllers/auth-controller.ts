@@ -6,13 +6,13 @@ export const loginUserController =
     try {
       const user = UserService.loginUser(table, req.body);
       req.session.ID = user.ID;
-      req.session.Role_ID = user.Role_ID;
+      req.session.RoleID = user.RoleID;
       req.session.username = user.username;
 
       res.json({
         "status": 200,
         "message": "Login successful", 
-        "role": user.Role_ID
+        "role": user.RoleID
       });
 
     } catch (error) { next(error); }
@@ -33,7 +33,7 @@ export const loginUserController =
         res.json({
           authenticated: true,
           ID: req.session.ID,
-          Role_ID: req.session.Role_ID,
+          Role_ID: req.session.RoleID,
           username: req.session.username
         });
       } else { res.json({ authenticated: false }); }
