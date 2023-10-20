@@ -11,6 +11,7 @@ import OtherPage from "./containers/OtherPage";
 import FAQPage from "./containers/FAQPage";
 import Browse from "./containers/BrowsePage";
 import ProfilePage from "./containers/ProfilePage";
+import WorkoutPage from './containers/WorkoutPage';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/browse" element={<Browse />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/workout" element={<WorkoutPage />} />
 
         </Route>
         <Route element={<RequireAuth allowedRoles={[2, 3]}/>}>
