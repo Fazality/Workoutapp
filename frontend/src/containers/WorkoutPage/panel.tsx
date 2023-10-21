@@ -6,23 +6,29 @@ import Button from "@mui/material/Button";
 
 const TransportFlow = (props) => {
 
-
     const [sd, setSd] = React.useState(0);
     const [names, setNames] = React.useState([])
+
+
+
 
     useEffect(() => {
         addPoint()
     }, [props.addExercise]);
 
     const addPoint = () => {
-        setNames([...props.addExercise]);
+        let ex = props.addExercise
+
+        setNames([...ex]);
         setSd(names.length);
+
     };
+
 
     return (
         <div className="flow">
-            {names.map((n, index) => (
-                <PointPanel sd={sd} name={n} remove={props.removeExercise}/>
+            {names.map((n, index, array) => (
+                <PointPanel key={index} sd={index} name={n.name} remove={props.removeExercise} typ={n.type} onInput={props.onData}/>
             ))}
         </div>
     );

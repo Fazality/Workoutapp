@@ -223,7 +223,7 @@ function Album(props) {
                                                 </Grid>
 
                                                 <Grid item xs={4}>
-                                                    <Button variant='contained' onClick={props.onClick} id={catalog[card].name}>Add</Button>
+                                                    <Button variant='contained' onClick={props.onClick} exercise={JSON.stringify(catalog[card])}>Add</Button>
                                                 </Grid>
                                             </Grid>
                                     </CardActions>

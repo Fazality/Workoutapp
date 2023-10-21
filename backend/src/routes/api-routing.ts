@@ -9,6 +9,7 @@ export default router;
 router.route("/workout/next").get(workoutController.getNextWorkoutController());
 router.route("/workout/all-planned").get(workoutController.getAllPlannedWorkoutsController());
 router.route("/workout/planned").get(workoutController.getPlannedWorkoutsController());
+router.route('/workout').post(workoutController.createNewWorkout());
 
 
 router.route('/user').post(genericController.createEntityController('User'));
@@ -23,7 +24,7 @@ router.route('/exercise').get(genericController.getAllEntitiesController('Catalo
 router.route('/exercise/:id').put(genericController.updateEntityController('CatalogExercise'));
 router.route('/exercise/:id').delete(genericController.deleteEntityController('CatalogExercise'));
 
-router.route('/workout').post(genericController.createEntityController('Workout'));
+
 router.route('/workout/:id').get(genericController.getEntityByIdController('Workout'));
 router.route('/workout').get(genericController.getAllEntitiesController('Workout'));
 router.route('/workout/:id').put(genericController.updateEntityController('Workout'));

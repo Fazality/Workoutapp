@@ -1,6 +1,20 @@
 import { NextFunction, Request, Response } from "express";
 import * as workoutService from "../services/workout-service";
+import * as genericService from "../services/generic-service";
 
+
+export const createNewWorkout =
+    () => (req : Request, res : Response, next : NextFunction) => {
+        const id = req.session.ID;
+        if (!id) { throw new Error("No user logged in");}
+
+        const data = JSON.parse(req.body)
+
+        const result = genericService.createEntity('Workout',{name : data.WorkoutName, UserID : id})
+
+
+        console.log(req.body)
+    }
 
 export const getAllPlannedWorkoutsController =
   () => (req: Request, res: Response<any>, next: NextFunction) => {
