@@ -34,13 +34,7 @@ function NavigationBar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button
-              component={Link}
-              to="/"
-              sx={{ my: 2, color: "black", display: "block" }}
-            >
-              Dashboard
-            </Button>
+
             <Button
               component={Link}
               to="/profile"

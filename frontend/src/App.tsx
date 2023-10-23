@@ -27,7 +27,7 @@ export default function App() {
         <Route element={<ContextLayout />}>
 
         <Route element={<RequireAuth allowedRoles={[1, 2, 3]}/>}>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<ProfilePage />} />
           <Route path="/other" element={<OtherPage />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/browse" element={<Browse />} />
