@@ -1,26 +1,17 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useEffect, useState} from "react";
-import Easy from '../../assets/Easy.png';
-import Medium from '../../assets/Medium.png';
-import Hard from '../../assets/Hard.png';
+import ExerciseCard from './ExerciseCard';
+
 import {FormControl, InputLabel, MenuItem, Select} from '@mui/material';
 import NavigationBar from "../navigationBar";
-/*I get some errors in this file, but it seems to work fine*/
-import missingImage from '../../assets/missing.png'; 
+
 
 const defaultTheme = createTheme();
 
@@ -35,16 +26,22 @@ export default function Exercises()
     }, []);
 
     const getAllExercises = () => {
-        fetch("http://localhost:4001/api/exercise", {
-            method: "GET",
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-        })
-            .then(async (response) =>
-            {
-                setNodes(await response.json());
-                setLoading(false);
-            });
+      fetch("http://localhost:4001/api/exercise", {
+          method: "GET",
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+      })
+      .then(response => {
+        if (!response.ok) { throw new Error(response.statusText) }
+        return response.json();
+      })
+      .then(data => {
+        setNodes(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
     }
 
     if (isLoading) { return <div className="App">Loading...</div>; }
@@ -56,30 +53,6 @@ export default function Exercises()
 
 }
 
-function Difficulty(difficulty)
-{
-    let boxStyle = {width: '25%', position: 'relative', left:'20%', top: '0%'};
-
-    if (difficulty.difficulty == 3) {
-        return (
-            <Box sx={boxStyle}>
-                <img src={Hard} style={{width:'100%'}} alt={'hard'}></img>
-            </Box>);
-    }
-    if (difficulty.difficulty == 2) {
-        return (
-            <Box sx={boxStyle}>
-                <img src={Medium} style={{width:'100%'}} alt={'medium'}></img>
-            </Box>);
-    }
-    else
-    {
-        return (
-            <Box sx={boxStyle}>
-                <img src={Easy} style={{width:'100%'}} alt={'easy'}></img>
-            </Box>);
-    }
-}
 
 function DifficultyFilter(props : {onFilter})
 {
@@ -88,7 +61,6 @@ function DifficultyFilter(props : {onFilter})
         setDifficulty(choice.props.value)
         props.onFilter(choice.props.value)
     }
-
 
     return(
 
@@ -119,16 +91,14 @@ function Album(allExercises) {
 
     for (let i = 0; i < catalog.length; i++)
     {
-        cards.push(i) /*This tells us how many "cards" there should be on the page
-                      *This number is equal to the amount of exercises*/
+        cards.push(i) /*This tells us how many "cards" there should be on the page *This number is equal to the amount of exercises*/
     }
     function changeCatalog(newCatalog)
     {
         cards = []
         for (let i = 0; i < newCatalog.length; i++)
         {
-            cards.push(i) /*This tells us how many "cards" there should be on the page
-                      *This number is equal to the amount of exercises*/
+            cards.push(i) /*This tells us how many "cards" there should be on the page *This number is equal to the amount of exercises*/
         }
         setCatalog(newCatalog)
     }
@@ -151,13 +121,7 @@ function Album(allExercises) {
     return (
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
-        <NavigationBar>
-          <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-              Xperta Workout Planner
-            </Typography>
-          </Toolbar>
-        </NavigationBar>
+        <NavigationBar />
         <main>
           {/* Hero unit */}
           <Box
@@ -196,52 +160,19 @@ function Album(allExercises) {
           <Container sx={{ py: 8 }} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
-              {cards.map((card) => (
-                <Grid item key={card} xs={12} sm={6} md={4}>
-                  <Card
-                    sx={{
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      alt="Exercise Image"
-                      height="180"
-                      image={`/ExerciseCatalog/${catalog[card].ID}.png`}
-                      onError={(e) => {
-                        const imgElement = e.target as HTMLImageElement;
-                        imgElement.onerror = null;
-                        imgElement.src =
-                          "/ExerciseCatalog/missing.png";
-                      }}
-                    />
-                    <CardContent sx={{ flexGrow: 1 }}>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {catalog[card].name}
-                      </Typography>
-                      <Typography>{catalog[card].description}</Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Typography
-                        gutterBottom
-                        color="primary"
-                        sx={{ position: "relative", left: "15%" }}
-                      >
-                        DIFFICULTY:{" "}
-                      </Typography>
-                      <Difficulty
-                        difficulty={catalog[card].difficulty}
-                      ></Difficulty>
-                    </CardActions>
-                  </Card>
+              {catalog.map((exercise, index) => (
+                <Grid item key={index} xs={12} sm={6} md={4}>
+                  <ExerciseCard
+                    id={exercise.ID}
+                    name={exercise.name}
+                    description={exercise.description}
+                    difficulty={exercise.difficulty}
+                  />
                 </Grid>
               ))}
             </Grid>
           </Container>
         </main>
-        {/* Footer */}
         <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
           <Typography variant="h6" align="center" gutterBottom></Typography>
           <Typography
@@ -251,7 +182,6 @@ function Album(allExercises) {
             component="p"
           ></Typography>
         </Box>
-        {/* End footer */}
       </ThemeProvider>
     );
 }

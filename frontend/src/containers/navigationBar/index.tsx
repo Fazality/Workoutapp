@@ -70,6 +70,9 @@ function NavigationBar() {
               FAQ
             </Button>
           </Box>
+          <Typography variant="h6" color="inherit" noWrap>
+            Xperta Workout Planner
+          </Typography>
         </Toolbar>
       </Container>
     </AppBar>
