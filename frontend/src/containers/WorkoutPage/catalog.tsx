@@ -16,6 +16,7 @@ import Easy from '../../assets/Easy.png';
 import Medium from '../../assets/Medium.png';
 import Hard from '../../assets/Hard.png';
 import {FormControl, InputLabel, MenuItem, Select} from '@mui/material';
+const defaultImage = "/ExerciseCatalog/missing.png";
 
 /*I get some errors in this file, but it seems to work fine*/
 
@@ -163,89 +164,98 @@ function Album(props) {
     }
 
     return (
-        <ThemeProvider theme={defaultTheme}>
-            <CssBaseline />
-            <main>
-                {/* Hero unit */}
-                <Box
+      <ThemeProvider theme={defaultTheme}>
+        <CssBaseline />
+        <main>
+          {/* Hero unit */}
+          <Box
+            sx={{
+              bgcolor: "background.paper",
+            }}
+          >
+            <Container maxWidth="sm">
+              <Stack
+                sx={{ pt: 4 }}
+                direction="row"
+                spacing={2}
+                justifyContent="center"
+              ></Stack>
+            </Container>
+          </Box>
+          <Container>
+            <Grid container spacing={2}>
+              <Grid item xs={2}>
+                <DifficultyFilter onFilter={handleFilter} />
+              </Grid>
+            </Grid>
+          </Container>
+          <Container sx={{ py: 8 }} maxWidth="md">
+            {/* End hero unit */}
+            <Grid container spacing={4}>
+              {cards.map((card) => (
+                <Grid item key={card} xs={12} sm={6} md={4}>
+                  <Card
                     sx={{
-                        bgcolor: 'background.paper',
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
                     }}
-                >
-                    <Container maxWidth="sm">
-
-                        <Stack
-                            sx={{ pt: 4 }}
-                            direction="row"
-                            spacing={2}
-                            justifyContent="center"
-                        >
-                        </Stack>
-                    </Container>
-                </Box>
-                <Container>
-                    <Grid container spacing={2}>
-                        <Grid item xs={2}>
-                            <DifficultyFilter onFilter={handleFilter}/>
+                  >
+                    <CardMedia
+                      component="div"
+                      sx={{ pt: "56.25%" }}
+                      image={
+                        `/ExerciseCatalog/${catalog[card].ID}.png` ||
+                        defaultImage
+                      }
+                    />
+                    <CardContent sx={{ flexGrow: 1 }}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {catalog[card].name}
+                      </Typography>
+                      <Typography>{catalog[card].description}</Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Grid
+                        container
+                        spacing={0}
+                        direction="row"
+                        justifyContent={"center"}
+                      >
+                        <Grid item xs={8}>
+                          <Difficulty
+                            difficulty={catalog[card].difficulty}
+                          ></Difficulty>
                         </Grid>
-                    </Grid>
-                </Container>
-                <Container sx={{ py: 8 }} maxWidth="md">
-                    {/* End hero unit */}
-                    <Grid container spacing={4}>
-                        {cards.map((card) => (
-                            <Grid item key={card} xs={12} sm={6} md={4}>
-                                <Card
-                                    sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                                >
-                                    <CardMedia
-                                        component="div"
-                                        sx={{
-                                            // 16:9
-                                            pt: '56.25%',
-                                        }}
-                                        image="https://source.unsplash.com/random?wallpapers"
-                                    />
-                                    <CardContent sx={{ flexGrow: 1 }}>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            {catalog[card].name}
-                                        </Typography>
-                                        <Typography>
-                                            {catalog[card].description}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                            <Grid container spacing={0} direction='row' justifyContent={'center'}>
-                                                <Grid item xs={8}>
-                                                    <Difficulty difficulty={catalog[card].difficulty}></Difficulty>
-                                                </Grid>
 
-                                                <Grid item xs={4}>
-                                                    <Button variant='contained' onClick={props.onClick} exercise={JSON.stringify(catalog[card])}>Add</Button>
-                                                </Grid>
-                                            </Grid>
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Container>
-            </main>
-            {/* Footer */}
-            <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-                <Typography variant="h6" align="center" gutterBottom>
-
-                </Typography>
-                <Typography
-                    variant="subtitle1"
-                    align="center"
-                    color="text.secondary"
-                    component="p"
-                >
-
-                </Typography>
-            </Box>
-            {/* End footer */}
-        </ThemeProvider>
+                        <Grid item xs={4}>
+                          <Button
+                            variant="contained"
+                            onClick={props.onClick}
+                            exercise={JSON.stringify(catalog[card])}
+                          >
+                            Add
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        </main>
+        {/* Footer */}
+        <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
+          <Typography variant="h6" align="center" gutterBottom></Typography>
+          <Typography
+            variant="subtitle1"
+            align="center"
+            color="text.secondary"
+            component="p"
+          ></Typography>
+        </Box>
+        {/* End footer */}
+      </ThemeProvider>
     );
 }
