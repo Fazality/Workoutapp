@@ -27,6 +27,7 @@ export default function WorkoutPage()
             [
             ]
     });
+    const [successText, setSuccessText] = useState(["", ""])
 
     function prepareRequestData(args)
     {
@@ -74,14 +75,23 @@ export default function WorkoutPage()
 
     function postData()
     {
-        requestData.WorkoutName = workoutName;
-        console.log(requestData)
-        fetch('http://localhost:4001/api/workout', {
-            method : 'POST',
-            credentials : 'include',
-            headers : {'Content-Type': 'application/json'},
-            body : JSON.stringify(requestData)
-        })
+        if (workoutName != "") {
+            requestData.WorkoutName = workoutName;
+            console.log(requestData)
+            fetch('http://localhost:4001/api/workout', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(requestData)
+            }).then((res: Response) => {
+                setExercisesInWorkout([])
+                setSuccessText(["Workout Saved!", "green"])
+            })
+        }
+        else
+        {
+            setSuccessText(["A workout needs a name!", "error"])
+        }
     }
 
     function removeExercise(args)
@@ -127,7 +137,9 @@ export default function WorkoutPage()
                         <Box sx={{marginTop:'3%', borderRadius:'5px', boxShadow:'2,1'}}>
                             <Panel addExercise={exercisesInWorkout} removeExercise={removeExercise} onData={prepareRequestData}></Panel>
                         </Box>
+                        <Typography variant='subtitle1' color={successText[1]}>{successText[0]}</Typography   >
                             <Button variant='contained' onClick={postData} sx={{marginTop:'3%'}}>Save Workout</Button>
+
                     </Box>
                 </Grid>
             </Grid>
