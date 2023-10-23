@@ -1,11 +1,12 @@
 import Database from 'better-sqlite3';
-const db = new Database('./db1.sqlite');
+export const db = new Database('./db1.sqlite');
+
 
 export const create = (table: string, data: any) => {
     const columns = Object.keys(data).join(', ');
     const placeholders = Object.keys(data).map(() => '?').join(', ');
     const values = Object.values(data);
-    return db.prepare(`INSERT INTO ${table} (${columns}) VALUES (${placeholders})`).run(...values).changes;
+    return db.prepare(`INSERT INTO ${table} (${columns}) VALUES (${placeholders})`).run(...values);
 }
 
 

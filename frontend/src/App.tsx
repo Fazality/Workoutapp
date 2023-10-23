@@ -13,6 +13,9 @@ import Browse from "./containers/BrowsePage";
 import ProfilePage from "./containers/ProfilePage";
 import WorkoutPage from './containers/WorkoutPage';
 
+import ContextLayout from "./containers/ContextLayout";
+
+
 export default function App() {
   return (
     <Routes>
@@ -21,6 +24,7 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
 
+        <Route element={<ContextLayout />}>
 
         <Route element={<RequireAuth allowedRoles={[1, 2, 3]}/>}>
           <Route path="/" element={<Dashboard />} />
@@ -30,6 +34,7 @@ export default function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/workout" element={<WorkoutPage />} />
 
+        </Route>
         </Route>
         <Route element={<RequireAuth allowedRoles={[2, 3]}/>}>
           <Route path="/admin" element={<AdminPage />} />

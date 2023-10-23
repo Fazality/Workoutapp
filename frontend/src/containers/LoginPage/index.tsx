@@ -27,7 +27,7 @@ export default function SignIn() {
   
   const navigate = useNavigate();
   const location = useLocation();
-  const  from  = location.state.from.pathname || "/";
+  const  from  = location.state?.from?.pathname || "/";
   
   const userRef = React.useRef<HTMLInputElement>(null);
   const errRef = React.useRef<HTMLParagraphElement>(null);
