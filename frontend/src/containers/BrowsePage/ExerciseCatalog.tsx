@@ -210,7 +210,7 @@ function Album(allExercises) {
                       component="div"
                       sx={{ pt: "56.25%" }}
                       image={
-                        `/ExerciseCatalog/${catalog[card].id}.png` ||
+                        `/ExerciseCatalog/${catalog[card].ID}.png` ||
                         defaultImage
                       }
                     />
