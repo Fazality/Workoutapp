@@ -170,8 +170,6 @@ function Album(props) {
                 <Box
                     sx={{
                         bgcolor: 'background.paper',
-                        pt: 8,
-                        pb: 6,
                     }}
                 >
                     <Container maxWidth="sm">
